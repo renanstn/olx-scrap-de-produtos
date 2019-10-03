@@ -1,7 +1,14 @@
+import configparser, telegram
 from scrapper import *
 from db_functions import *
 
 def main():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    token = config['bot']['token']
+    bot = telegram.Bot(token=token)
+
     produto_buscado = 'bittboy'
 
     # Fazer o web_scrap

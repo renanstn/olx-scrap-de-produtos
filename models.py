@@ -10,3 +10,12 @@ class Anuncio(Model):
 
     class Meta:
         database = db
+
+
+class Busca(Model):
+
+    chat_id = CharField()
+    produto = CharField()
+
+    class Meta():
+        database = db
