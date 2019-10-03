@@ -2,7 +2,7 @@ import re
 from datetime import date
 from requests import get
 from bs4 import BeautifulSoup
-from store import *
+from db_functions import *
 
 produto_buscado = 'bittboy'
 
@@ -43,3 +43,7 @@ for item in itens:
 # Salvar no banco de dados
 for item in itens_encontrados:
     salvar_dados(item)
+
+# Printa os títulos de todos os anúncios salvos
+for i in get_anuncios_salvos():
+    print(i.titulo)

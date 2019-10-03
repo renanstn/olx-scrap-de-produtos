@@ -1,15 +1,6 @@
 from peewee import *
-
-db = SqliteDatabase('database.db')
-
-class Anuncio(Model):
-    titulo = CharField()
-    preco = CharField()
-    local = CharField()
-    data_pesquisa = DateField()
-
-    class Meta:
-        database = db
+from models import Anuncio
+from db_connection import db
 
 
 db.create_tables([Anuncio])
@@ -29,3 +20,6 @@ def salvar_dados(data):
 def possui_duplicidade(data):
     duplicados = Anuncio.select().where(Anuncio.titulo == data['titulo'])
     return len(duplicados) > 0
+
+def get_anuncios_salvos():
+    return Anuncio.select()
