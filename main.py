@@ -1,4 +1,5 @@
-import configparser, telegram
+import telegram
+from token import token
 from scrapper import *
 from db_functions import *
 
