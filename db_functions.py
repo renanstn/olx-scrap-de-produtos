@@ -37,5 +37,8 @@ def possui_duplicidade(data):
     duplicados = Anuncio.select().where(Anuncio.titulo == data['titulo'])
     return len(duplicados) > 0
 
-def get_anuncios_salvos():
-    return Anuncio.select()
+def get_solicitacoes():
+    return Solicitacao.select()
+
+def get_anuncios_salvos(id_solicitante):
+    return Anuncio.select().where(Anuncio.solicitante == id_solicitante)
