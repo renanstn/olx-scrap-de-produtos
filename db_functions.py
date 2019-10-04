@@ -5,7 +5,7 @@ from db_connection import db
 
 db.create_tables([Anuncio, Solicitacao])
 
-def salvar_dados_solicitante(data):
+def salvar_solicitante(data):
     solicitante = Solicitacao.create(
         chat_id = data['chat_id'],
         produto = data['produto']
@@ -13,7 +13,14 @@ def salvar_dados_solicitante(data):
 
     return solicitante
 
-def salvar_dados_anuncio(data, solicitante):
+def apagar_solicitante(data):
+    para_apagar = Solicitacao.get(
+        Solicitacao.chat_id == data['chat_id'],
+        Solicitacao.produto == data['produto']
+    )
+    para_apagar.delete_instance()
+
+def salvar_anuncio(data, solicitante):
     if not possui_duplicidade(data):
 
         anuncio = Anuncio(
