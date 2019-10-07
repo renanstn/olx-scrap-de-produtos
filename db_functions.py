@@ -20,7 +20,7 @@ def apagar_solicitante(data):
     )
     para_apagar.delete_instance()
 
-def salvar_anuncio(data, solicitante):
+def salvar_anuncio(data, id_solicitante):
     if not possui_duplicidade(data):
 
         anuncio = Anuncio(
@@ -28,10 +28,13 @@ def salvar_anuncio(data, solicitante):
             preco = data['preco'],
             local = data['local'],
             data_pesquisa = data['data_pesquisa'],
-            solicitante = solicitante
+            solicitante = id_solicitante
         )
 
         anuncio.save()
+
+def apagar_anuncio(anuncio):
+    anuncio.delete_instance()
 
 def possui_duplicidade(data):
     duplicados = Anuncio.select().where(Anuncio.titulo == data['titulo'])
