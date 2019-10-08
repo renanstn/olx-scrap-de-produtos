@@ -1,5 +1,7 @@
 # olx-scrap-de-produtos
 
+### @OlxScrapperBot
+
 Script feito para facilitar a vida de quem busca diariamente itens específicos no OLX.
 
 - Ele identifica os itens encontrados e extrai o título do produto, valor, e localidade do vendedor.
