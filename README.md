@@ -9,4 +9,8 @@ Script feito para facilitar a vida de quem busca diariamente itens específicos 
 
 Atualmente utilizo o **Beautiful Soup** para fazer o web scrap e o **Peewee** para manipular o banco.
 
-*(em progresso...)*
+Screenshots:
+
+<img src="https://github.com/Doc-McCoy/olx-scrap-de-produtos/blob/master/screenshots/screenshot_01.jpg" width="360" height="640"/>
+
+<img src="https://github.com/Doc-McCoy/olx-scrap-de-produtos/blob/master/screenshots/screenshot_02.jpg" width="360" height="640"/>
