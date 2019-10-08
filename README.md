@@ -1,7 +1,7 @@
 # olx-scrap-de-produtos
 
 ### Telegram:
-[@OlxScrapperBot](t.me/OlxScrapperBot)
+[@OlxScrapperBot](https://t.me/OlxScrapperBot)
 
 Script feito para facilitar a vida de quem busca diariamente itens específicos no OLX.
 
