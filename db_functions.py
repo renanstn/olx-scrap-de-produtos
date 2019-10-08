@@ -24,11 +24,12 @@ def salvar_anuncio(data, id_solicitante):
     if not possui_duplicidade(data):
 
         anuncio = Anuncio(
-            titulo = data['titulo'],
-            preco = data['preco'],
-            local = data['local'],
-            data_pesquisa = data['data_pesquisa'],
-            solicitante = id_solicitante
+            titulo          = data['titulo'],
+            preco           = data['preco'],
+            local           = data['local'],
+            link            = data['link'],
+            data_pesquisa   = data['data_pesquisa'],
+            solicitante     = id_solicitante
         )
 
         anuncio.save()

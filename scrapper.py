@@ -24,20 +24,30 @@ def web_scrap(produto_buscado):
     for item in itens:
         if item.has_attr('data-list_id'):
             link = item.find('a')
+
             # Titulo do produto
             obj_titulo = link.find('h2', class_='OLXad-list-title')
             titulo = regex.sub('', obj_titulo.text)
+
             # Preço do produto
             obj_preco = link.find('p', class_='OLXad-list-price')
-            preco = regex.sub('', obj_preco.text)
+            if not obj_preco: # Não pegar produtos sem preços
+                continue
+            # Pegar o preço, removendo o cifrão e o ponto
+            preco = regex.sub('', obj_preco.text.replace('R$', '')).replace('.','').strip()
+
             # Local do vendedor
             obj_local = link.find('p', class_='text detail-region')
             local = regex.sub('', obj_local.text)
+
+            # Link do anúncio
+            link_produto = link['href']
 
             itens_encontrados.append({
                 'titulo' : titulo,
                 'preco' : preco,
                 'local' : local,
+                'link' : link_produto,
                 'data_pesquisa' : date.today()
             })
 

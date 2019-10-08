@@ -6,11 +6,12 @@ from params import token
 
 bot = Bot(token=token)
 
-# Acessar os produtor que precisam ser buscados:
 solicitacoes = get_solicitacoes()
 
 for solicitacao in solicitacoes:
-    produto = solicitacao.produto
+    # Trocar os espaços por + para construir a URL corretamente
+    produto = solicitacao.produto.replace(' ', '+')
+
     anuncios_salvos = get_anuncios_salvos(solicitacao.id)
 
     anuncios_encontrados = web_scrap(produto)
@@ -21,12 +22,19 @@ for solicitacao in solicitacoes:
     novos_anuncios = [x for x in anuncios_encontrados if x['titulo'] not in titulos_produtos_salvos]
     anuncios_apagados = [x for x in anuncios_salvos if x not in titulos_anuncios_encontrados]
 
-    # Apagar anuncios que não existem mais
+    # Remover anúncios que não existem mais
     for anuncio in anuncios_apagados:
         apagar_anuncio(anuncio)
-    
+
     # Salvar novos anúncios no banco e enviar notificações
     for anuncio in novos_anuncios:
         salvar_anuncio(anuncio, solicitacao.id)
-        mensagem = "Insira aqui a mensagem de produto encontrado."
+
+        mensagem = "Novo produto encontrado:\n\n- {}\n- Valor: R$ {:.2f}\n- Local: {}\n- Link: {}\n".format(
+            anuncio['titulo'],
+            int(anuncio['preco']),
+            anuncio['local'],
+            anuncio['link']
+        )
+
         bot.send_message(solicitacao.chat_id, mensagem)
