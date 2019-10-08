@@ -3,14 +3,13 @@ from models import *
 from db_connection import db
 
 
-db.create_tables([Anuncio, Solicitacao])
+#db.create_tables([Anuncio, Solicitacao])
 
 def salvar_solicitante(data):
     solicitante = Solicitacao.create(
         chat_id = data['chat_id'],
         produto = data['produto']
     )
-
     return solicitante
 
 def apagar_solicitante(data):
@@ -39,10 +38,13 @@ def apagar_anuncio(anuncio):
 
 def possui_duplicidade(data):
     duplicados = Anuncio.select().where(Anuncio.titulo == data['titulo'])
-    return len(duplicados) > 0
+    possui_duplicados = len(duplicados) > 0
+    return possui_duplicados
 
 def get_solicitacoes():
-    return Solicitacao.select()
+    solicitacoes = Solicitacao.select()
+    return solicitacoes
 
 def get_anuncios_salvos(id_solicitante):
-    return Anuncio.select().where(Anuncio.solicitante == id_solicitante)
+    anuncios = Anuncio.select().where(Anuncio.solicitante == id_solicitante)
+    return anuncios

@@ -1,6 +1,7 @@
 from telegram.ext import Updater, CommandHandler
 from params import token
 from bot_functions import *
+from db_connection import db
 
 
 def listener():
@@ -20,3 +21,4 @@ def listener():
 
 if __name__ == '__main__':
     listener()
+    db.close()

@@ -1,4 +1,12 @@
-from peewee import SqliteDatabase
+from peewee import MySQLDatabase #, SqliteDatabase
+from params import db_params
 
-# Adequar este código para funcionar com sqlite ou mysql.
-db = SqliteDatabase('database.db')
+
+# db = SqliteDatabase('database.db')
+db = MySQLDatabase(
+    db_params['database'],
+    host = db_params['host'],
+    port = int(db_params['port']),
+    user = db_params['user'],
+    password = db_params['password']
+)

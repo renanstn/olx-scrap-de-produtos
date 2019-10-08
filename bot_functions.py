@@ -4,9 +4,14 @@ from db_functions import salvar_solicitante, apagar_solicitante
 def start(update, context):
     ''' Mensagem de boas vindas do bot e instruções de uso. '''
     
+    text = ("Seja bem vindo ao scrapperOLX.\n\n"
+        "Cadastre um produto para ser buscado com o comando:\n /busca <nome_do_produto>\n\n"
+        "Após cadastrar, buscas diárias serão feitas por este produto e eu te avisarei "
+        "sempre que aparecer uma novidade.\n\nPara cancelar uma busca, use:\n /cancelar <nome_do_produto>.\n\n"
+    )
     context.bot.send_message(
         chat_id=update.message.chat_id,
-        text='Seja bem vindo ao WebScrapper OLX'
+        text=text
     )
 
 def busca(update, context):
@@ -25,6 +30,7 @@ def busca(update, context):
             chat_id = chat_id,
             text = 'O produto "{}" foi cadastrado. Buscas periódicas serão feitas a partir de agora.'.format(produto)
         )
+        db.close()
 
     else:
         context.bot.send_message(

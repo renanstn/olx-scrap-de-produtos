@@ -8,6 +8,7 @@ future==0.17.1
 idna==2.8
 peewee==3.11.2
 pycparser==2.19
+PyMySQL==0.9.3
 python-telegram-bot==12.1.1
 requests==2.22.0
 six==1.12.0
