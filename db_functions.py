@@ -3,8 +3,6 @@ from models import *
 from db_connection import db
 
 
-#db.create_tables([Anuncio, Solicitacao])
-
 def salvar_solicitante(data):
     solicitante = Solicitacao.create(
         chat_id = data['chat_id'],

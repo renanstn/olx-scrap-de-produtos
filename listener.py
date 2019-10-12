@@ -5,6 +5,8 @@ from db_connection import db
 
 
 def listener():
+    ''' Script que fica sempre ativo, aguardando comandos do bot. '''
+
     updater     = Updater(token=token, use_context=True)
     dispatcher  = updater.dispatcher
 
