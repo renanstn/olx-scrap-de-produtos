@@ -7,7 +7,7 @@ def start(update, context):
     text = ("Seja bem vindo ao scrapperOLX.\n\n"
         "Cadastre um produto para ser buscado com o comando:\n /busca <nome_do_produto>\n\n"
         "Após cadastrar, buscas diárias serão feitas por este produto e eu te avisarei "
-        "sempre que aparecer uma novidade.\n\nPara cancelar uma busca, use:\n /cancelar <nome_do_produto>.\n\n"
+        "sempre que aparecer uma novidade.\n\nPara cancelar uma busca, use:\n /cancela <nome_do_produto>.\n\n"
     )
     context.bot.send_message(
         chat_id=update.message.chat_id,
