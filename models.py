@@ -18,7 +18,7 @@ class Anuncio(Model):
     local = CharField()
     link = CharField()
     data_pesquisa = DateField()
-    solicitante = ForeignKeyField(Solicitacao)
+    solicitante = ForeignKeyField(Solicitacao, on_delete='CASCADE')
 
     class Meta:
         database = db
