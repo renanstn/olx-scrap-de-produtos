@@ -19,5 +19,5 @@ Screenshots:
 <img src="https://github.com/Doc-McCoy/olx-scrap-de-produtos/blob/master/screenshots/screenshot_02.jpg" width="360" height="640"/>
 
 #### TODO:
-- Organizar estrutura de arquivos e pastas
+- Organizar estrutura de arquivos e pastas pois está uma zona
 - Implementar um comando que retorna todos os itens já cadastrados por um usuário
