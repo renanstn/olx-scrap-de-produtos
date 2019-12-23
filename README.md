@@ -33,7 +33,9 @@ Caso queira subir seu próprio servidor e criar seu próprio bot, siga os passos
 - Ative o ambiente virtual com: `source venv/bin/activate`
 - Instale as dependências: `pip install -r requirements.txt`
 - Crie um arquivo chamado `config.ini` na raíz do projeto, e coloque nele o token do seu bot e as configurações do banco de dados seguindo o modelo:
+
 ![config.ini](https://github.com/Doc-McCoy/olx-scrap-de-produtos/blob/master/screenshots/config.png)
+
 - Para manter o código sempre "escutando", mantenha sempre executando o arquivo: `python listener.py`
 - Para procurar pelos produtos cadastrados, rode o arquivo: `python checker.py` (geralmente programo uma cron para rodar este comando todos os dias automaticamente)
 
