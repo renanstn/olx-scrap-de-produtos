@@ -47,6 +47,14 @@ def get_solicitacoes():
     solicitacoes = Solicitacao.select()
     return solicitacoes
 
+def get_solicitacoes_usuario(id_solicitante):
+    solicitacoes = Solicitacao.select(Solicitacao.produto).where(Solicitacao.chat_id == id_solicitante)
+    return solicitacoes
+
 def get_anuncios_salvos(id_solicitante):
     anuncios = Anuncio.select().where(Anuncio.solicitante == id_solicitante)
     return anuncios
+
+def verifica_produto_duplicado(nome_produto):
+    produto_existente = Solicitacao.select().where(Solicitacao.produto == nome_produto)
+    return len(produto_existente) > 0

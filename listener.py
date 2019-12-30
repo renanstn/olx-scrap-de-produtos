@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler
 from params import token
-from bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap
+from bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap, lista_produtos
 from db_connection import db
 
 
@@ -14,11 +14,13 @@ def listener():
     busca_handler   = CommandHandler('busca', cadastra_produto)
     cancela_handler = CommandHandler('cancela', cancela_produto)
     scrap_handler   = CommandHandler('scrap', run_scrap)
+    lista_handler   = CommandHandler('lista', lista_produtos)
 
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(busca_handler)
     dispatcher.add_handler(cancela_handler)
     dispatcher.add_handler(scrap_handler)
+    dispatcher.add_handler(lista_handler)
 
     updater.start_polling()
 
