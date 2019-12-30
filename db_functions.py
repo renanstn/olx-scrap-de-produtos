@@ -3,19 +3,20 @@ from models import *
 from db_connection import db
 
 
-def salvar_solicitante(data):
+def salvar_solicitacao(data):
     solicitante = Solicitacao.create(
         chat_id = data['chat_id'],
         produto = data['produto']
     )
     return solicitante
 
-def apagar_solicitante(data):
-    para_apagar = Solicitacao.get(
+def apagar_solicitacao(data):
+    solicitacao_para_apagar = Solicitacao.get(
         Solicitacao.chat_id == data['chat_id'],
         Solicitacao.produto == data['produto']
     )
-    para_apagar.delete_instance()
+    apagar_todos_os_anuncios(solicitacao_para_apagar)
+    solicitacao_para_apagar.delete_instance()
 
 def salvar_anuncio(data, id_solicitante):
     if not possui_duplicidade(data):
@@ -33,6 +34,9 @@ def salvar_anuncio(data, id_solicitante):
 
 def apagar_anuncio(anuncio):
     anuncio.delete_instance()
+
+def apagar_todos_os_anuncios(solicitante):
+    Anuncio.delete().where(Anuncio.solicitante == solicitante).execute()
 
 def possui_duplicidade(data):
     duplicados = Anuncio.select().where(Anuncio.titulo == data['titulo'])

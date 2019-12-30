@@ -29,6 +29,7 @@ Screenshots:
 Caso queira subir seu próprio servidor e criar seu próprio bot, siga os passos:
 
 - Crie um bot no telegram [clique aqui caso não saiba como](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
+- Clone o projeto
 - Inicialize um ambiente virtual com o comando: `python -m venv venv`
 - Ative o ambiente virtual com: `source venv/bin/activate`
 - Instale as dependências: `pip install -r requirements.txt`
@@ -36,6 +37,7 @@ Caso queira subir seu próprio servidor e criar seu próprio bot, siga os passos
 
 ![config.ini](https://github.com/Doc-McCoy/olx-scrap-de-produtos/blob/master/screenshots/config.png)
 
+- Inicialize o banco de dados com o comando `python initialize_db.py`
 - Para manter o código sempre "escutando", mantenha sempre executando o arquivo: `python listener.py`
 - Para procurar pelos produtos cadastrados, rode o arquivo: `python checker.py` (geralmente programo uma cron para rodar este comando todos os dias automaticamente)
 

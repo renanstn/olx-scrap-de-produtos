@@ -1,20 +1,22 @@
-from db_functions import salvar_solicitante, apagar_solicitante
+from db_functions import salvar_solicitacao, apagar_solicitacao, apagar_todos_os_anuncios
+from checker import check
 
 
-def start(update, context):
+def welcome(update, context):
     ''' Mensagem de boas vindas do bot e instruções de uso. '''
     
     text = ("Seja bem vindo ao scrapperOLX.\n\n"
         "Cadastre um produto para ser buscado com o comando:\n /busca <nome_do_produto>\n\n"
         "Após cadastrar, buscas diárias serão feitas por este produto e eu te avisarei "
         "sempre que aparecer uma novidade.\n\nPara cancelar uma busca, use:\n /cancela <nome_do_produto>.\n\n"
+        "Para fazer manualmente a busca pelos produtos cadastrados, utilize o comando:\n /scrap"
     )
     context.bot.send_message(
         chat_id=update.message.chat_id,
         text=text
     )
 
-def busca(update, context):
+def cadastra_produto(update, context):
     ''' Cadastra um novo produto para ser buscado periodicamente. '''
 
     chat_id = update.message.chat_id
@@ -25,7 +27,7 @@ def busca(update, context):
             'chat_id' : chat_id,
             'produto' : produto
         }
-        salvar_solicitante(dados)
+        salvar_solicitacao(dados)
         context.bot.send_message(
             chat_id = chat_id,
             text = 'O produto "{}" foi cadastrado. Buscas periódicas serão feitas a partir de agora.'.format(produto)
@@ -38,7 +40,7 @@ def busca(update, context):
             text = 'Envie após o /busca o nome do produto que deseja buscar periodicamente.'
         )
 
-def cancela(update, context):
+def cancela_produto(update, context):
     ''' Exclui um produto cadastrado para que não seja mas buscado. '''
 
     chat_id = update.message.chat_id
@@ -50,7 +52,7 @@ def cancela(update, context):
             'produto' : produto
         }
         try:
-            apagar_solicitante(dados)
+            apagar_solicitacao(dados)
             context.bot.send_message(
                 chat_id = chat_id,
                 text = 'O produto "{}" foi excluído da sua lista de buscas periódicas.'.format(produto)
@@ -64,5 +66,23 @@ def cancela(update, context):
     else:
         context.bot.send_message(
             chat_id = chat_id,
-            text = 'Envie o nome do produto que deseja cancelar as buscas periódicas.'
+            text = 'Envie o comando, seguido do nome do produto que deseja cancelar as buscas periódicas.\n'
+            'Exemplo: /cancela relógio'
         )
+
+def run_scrap(update, context):
+    ''' Executa manualmente o web scrap. '''
+
+    chat_id = update.message.chat_id
+
+    context.bot.send_message(
+        chat_id = chat_id,
+        text = 'Buscando...'
+    )
+
+    check()
+
+    context.bot.send_message(
+        chat_id = chat_id,
+        text = 'Busca finalizada.'
+    )
