@@ -45,4 +45,3 @@ Caso queira subir seu próprio servidor e criar seu próprio bot, siga os passos
 
 #### TODO:
 - Organizar estrutura de arquivos e pastas pois está uma zona
-- Implementar um comando que retorna todos os itens já cadastrados por um usuário
