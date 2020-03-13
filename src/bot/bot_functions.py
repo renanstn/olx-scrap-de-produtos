@@ -1,4 +1,4 @@
-from db_functions import salvar_solicitacao, apagar_solicitacao, apagar_todos_os_anuncios, get_solicitacoes_usuario, verifica_produto_duplicado
+from database.functions import salvar_solicitacao, apagar_solicitacao, apagar_todos_os_anuncios, get_solicitacoes_usuario, verifica_produto_duplicado
 from checker import check
 
 

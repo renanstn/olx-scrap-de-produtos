@@ -1,9 +1,8 @@
 from peewee import *
-from db_connection import db
+from .connection import db
 
 
 class Solicitacao(Model):
-
     chat_id = CharField()
     produto = CharField()
 
@@ -12,7 +11,6 @@ class Solicitacao(Model):
 
 
 class Anuncio(Model):
-
     titulo = CharField()
     preco = CharField()
     local = CharField()

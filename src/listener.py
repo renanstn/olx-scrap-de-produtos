@@ -1,7 +1,9 @@
 from telegram.ext import Updater, CommandHandler
 from params import token
-from bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap, lista_produtos
-from db_connection import db
+from bot.bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap, lista_produtos
+from database.connection import db
+from database.models import *
+from database.connection import db
 
 
 def listener():
@@ -26,5 +28,9 @@ def listener():
 
 
 if __name__ == '__main__':
+    db.create_tables([Anuncio, Solicitacao])
+    db.close()
+
+    print('listening pra caralho...')
     listener()
     db.close()

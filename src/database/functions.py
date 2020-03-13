@@ -1,6 +1,6 @@
 from peewee import *
-from models import *
-from db_connection import db
+from database.models import *
+from database.connection import db
 
 
 def salvar_solicitacao(data):

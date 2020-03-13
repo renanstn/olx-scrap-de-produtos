@@ -1,8 +1,8 @@
-from db_functions import get_anuncios_salvos, get_solicitacoes, apagar_anuncio, salvar_anuncio
+from database.functions import get_anuncios_salvos, get_solicitacoes, apagar_anuncio, salvar_anuncio
 from scrapper import web_scrap
 from telegram import Bot
 from params import token
-from db_connection import db
+from database.connection import db
 
 
 def check():
