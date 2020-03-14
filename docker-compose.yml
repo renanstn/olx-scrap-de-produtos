@@ -10,8 +10,8 @@ services:
             - ./src:/app
 
     database:
-        image: mysql
+        image: postgres
         restart: always
         environment: 
-            MYSQL_ROOT_PASSWORD: admin
-            MYSQL_DATABASE: olx
+            POSTGRES_PASSWORD: admin
+            POSTGRES_DB: olx
