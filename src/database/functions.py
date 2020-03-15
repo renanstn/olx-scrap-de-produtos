@@ -3,34 +3,38 @@ from database.models import *
 from database.connection import db
 
 
-def salvar_solicitacao(data):
-    solicitante = Solicitacao.create(
-        chat_id = data['chat_id'],
-        produto = data['produto']
-    )
-    return solicitante
+class DatabaseFunctions:
+    def __init__(self, db_connection):
+        self.connection = db_connection
 
-def apagar_solicitacao(data):
-    solicitacao_para_apagar = Solicitacao.get(
-        Solicitacao.chat_id == data['chat_id'],
-        Solicitacao.produto == data['produto']
-    )
-    apagar_todos_os_anuncios(solicitacao_para_apagar)
-    solicitacao_para_apagar.delete_instance()
-
-def salvar_anuncio(data, id_solicitante):
-    if not possui_duplicidade(data):
-
-        anuncio = Anuncio(
-            titulo          = data['titulo'],
-            preco           = data['preco'],
-            local           = data['local'],
-            link            = data['link'],
-            data_pesquisa   = data['data_pesquisa'],
-            solicitante     = id_solicitante
+    def salvar_solicitacao(self, data):
+        solicitante = Solicitacao.create(
+            chat_id = data['chat_id'],
+            produto = data['produto']
         )
+        return solicitante
 
-        anuncio.save()
+    def apagar_solicitacao(self, data):
+        solicitacao_para_apagar = Solicitacao.get(
+            Solicitacao.chat_id == data['chat_id'],
+            Solicitacao.produto == data['produto']
+        )
+        self.apagar_todos_os_anuncios(solicitacao_para_apagar)
+        solicitacao_para_apagar.delete_instance()
+
+    def salvar_anuncio(self, data, id_solicitante):
+        if not possui_duplicidade(data):
+
+            anuncio = Anuncio(
+                titulo          = data['titulo'],
+                preco           = data['preco'],
+                local           = data['local'],
+                link            = data['link'],
+                data_pesquisa   = data['data_pesquisa'],
+                solicitante     = id_solicitante
+            )
+
+            anuncio.save()
 
 def apagar_anuncio(anuncio):
     anuncio.delete_instance()

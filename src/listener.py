@@ -1,12 +1,11 @@
 from telegram.ext import Updater, CommandHandler
-from params import token
+from params import token, db_params
 from bot.bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap, lista_produtos
-from database.connection import db
+from database.connection import DatabaseConnection
 from database.models import *
-from database.connection import db
 
 
-def listener():
+def listener(db):
     ''' Script que fica sempre em execução, aguardando comandos do bot. '''
 
     updater     = Updater(token=token, use_context=True)
@@ -28,9 +27,10 @@ def listener():
 
 
 if __name__ == '__main__':
+    db = DatabaseConnection(db_params)
+    db = db.get_connection()
     db.create_tables([Anuncio, Solicitacao])
     db.close()
-
     print('listening pra caralho...')
-    listener()
+    listener(db)
     db.close()

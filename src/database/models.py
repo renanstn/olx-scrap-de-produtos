@@ -1,5 +1,4 @@
 from peewee import *
-from .connection import db
 
 
 class Solicitacao(Model):
