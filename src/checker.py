@@ -1,8 +1,7 @@
-from database.functions import get_anuncios_salvos, get_solicitacoes, apagar_anuncio, salvar_anuncio
+from database.functions import DatabaseFunctions
 from scrapper import web_scrap
 from telegram import Bot
 from params import token
-from database.connection import db
 
 
 def check():
@@ -13,13 +12,13 @@ def check():
 
     bot = Bot(token=token)
 
-    solicitacoes = get_solicitacoes()
+    solicitacoes = DatabaseFunctions.get_solicitacoes()
 
     for solicitacao in solicitacoes:
         # Trocar os espaços por + para construir a URL corretamente
         produto = solicitacao.produto.replace(' ', '+')
 
-        anuncios_salvos = get_anuncios_salvos(solicitacao.id)
+        anuncios_salvos = DatabaseFunctions.get_anuncios_salvos(solicitacao.id)
 
         anuncios_encontrados = web_scrap(produto)
 
@@ -31,11 +30,11 @@ def check():
 
         # Remover anúncios que não existem mais
         for anuncio in anuncios_apagados:
-            apagar_anuncio(anuncio)
+            DatabaseFunctions.apagar_anuncio(anuncio)
 
         # Salvar novos anúncios no banco e enviar notificações
         for anuncio in novos_anuncios:
-            salvar_anuncio(anuncio, solicitacao.id)
+            DatabaseFunctions.salvar_anuncio(anuncio, solicitacao.id)
 
             mensagem = "Novo produto encontrado:\n\n- {}\n- Valor: R$ {:.2f}\n- Local: {}\n- Link: {}\n".format(
                 anuncio['titulo'],
@@ -49,4 +48,3 @@ def check():
 
 if __name__ == '__main__':
     check()
-    db.close()

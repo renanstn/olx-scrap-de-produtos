@@ -1,36 +1,28 @@
 from telegram.ext import Updater, CommandHandler
-from params import token, db_params
-from bot.bot_functions import welcome, cadastra_produto, cancela_produto, run_scrap, lista_produtos
-from database.connection import DatabaseConnection
-from database.models import *
+from bot.actions import BotActions
 
 
-def listener(db):
-    ''' Script que fica sempre em execução, aguardando comandos do bot. '''
+class Listener:
 
-    updater     = Updater(token=token, use_context=True)
-    dispatcher  = updater.dispatcher
+    def __init__(self, token):
+        self.token = token
+        
+    def listen(self):
+        ''' Script que fica sempre em execução, aguardando comandos do bot. '''
 
-    start_handler   = CommandHandler('start', welcome)
-    busca_handler   = CommandHandler('busca', cadastra_produto)
-    cancela_handler = CommandHandler('cancela', cancela_produto)
-    scrap_handler   = CommandHandler('scrap', run_scrap)
-    lista_handler   = CommandHandler('lista', lista_produtos)
+        updater     = Updater(token=self.token, use_context=True)
+        dispatcher  = updater.dispatcher
 
-    dispatcher.add_handler(start_handler)
-    dispatcher.add_handler(busca_handler)
-    dispatcher.add_handler(cancela_handler)
-    dispatcher.add_handler(scrap_handler)
-    dispatcher.add_handler(lista_handler)
+        start_handler   = CommandHandler('start', BotActions.welcome)
+        busca_handler   = CommandHandler('busca', BotActions.cadastra_produto)
+        cancela_handler = CommandHandler('cancela', BotActions.cancela_produto)
+        scrap_handler   = CommandHandler('scrap', BotActions.run_scrap)
+        lista_handler   = CommandHandler('lista', BotActions.lista_produtos)
 
-    updater.start_polling()
+        dispatcher.add_handler(start_handler)
+        dispatcher.add_handler(busca_handler)
+        dispatcher.add_handler(cancela_handler)
+        dispatcher.add_handler(scrap_handler)
+        dispatcher.add_handler(lista_handler)
 
-
-if __name__ == '__main__':
-    db = DatabaseConnection(db_params)
-    db = db.get_connection()
-    db.create_tables([Anuncio, Solicitacao])
-    db.close()
-    print('listening pra caralho...')
-    listener(db)
-    db.close()
+        updater.start_polling()

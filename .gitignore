@@ -2,5 +2,6 @@ __pycache__/
 .vscode/
 venv/
 .venv/
+.env/
 *.db
 *.ini
