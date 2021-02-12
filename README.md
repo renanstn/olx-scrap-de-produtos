@@ -1,4 +1,4 @@
-# olx-scrap-de-produtos
+# olx-scrap-de-produtos [projeto deprecado]
 
 --------------------
 
