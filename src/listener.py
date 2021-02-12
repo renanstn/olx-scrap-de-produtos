@@ -6,9 +6,11 @@ class Listener:
 
     def __init__(self, token):
         self.token = token
-        
+
     def listen(self):
-        ''' Script que fica sempre em execução, aguardando comandos do bot. '''
+        """
+        Script que fica sempre em execução, aguardando comandos do bot.
+        """
 
         updater     = Updater(token=self.token, use_context=True)
         dispatcher  = updater.dispatcher

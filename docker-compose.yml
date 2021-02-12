@@ -1,17 +1,25 @@
 version: "3"
 
-services: 
+services:
 
     bot:
         build: .
-        depends_on: 
+        depends_on:
             - database
-        volumes: 
+        volumes:
             - ./src:/app
 
     database:
         image: postgres
         restart: always
-        environment: 
+        environment:
             POSTGRES_PASSWORD: admin
             POSTGRES_DB: olx
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        depends_on:
+            - database

@@ -5,10 +5,12 @@ from params import token
 
 
 def check():
-    ''' Função principal, que, a partir das solicitações cadastradas, faz o web scrap,
+    """
+    Função principal, que, a partir das solicitações cadastradas, faz o web scrap,
     identifica novos anúncios, apaga anúncios finalizados, e envia a mensagem pelo bot
     notificando o usuário.
-    Este script deve ser chamado periodicamente. '''
+    Este script deve ser chamado periodicamente.
+    """
 
     bot = Bot(token=token)
 

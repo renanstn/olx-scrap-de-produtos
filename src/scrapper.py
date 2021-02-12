@@ -4,7 +4,7 @@ from requests import get
 from bs4 import BeautifulSoup
 
 def web_scrap(produto_buscado):
-    ''' Faz o web scrap no sit do olx e retorna uma lista de 
+    ''' Faz o web scrap no sit do olx e retorna uma lista de
     dicionários com os itens encontrados. '''
 
     url = 'https://sp.olx.com.br/grande-campinas?q={}'.format(produto_buscado)
@@ -12,11 +12,12 @@ def web_scrap(produto_buscado):
     # Regex que remove os \n, \r e \t dos textos
     regex = re.compile('[\n\r\t]')
 
-    html = get(url)
+    headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"}
+    request = get(url, headers=headers)
 
-    soup = BeautifulSoup(html.text, 'html.parser')
+    soup = BeautifulSoup(request.text, 'html.parser')
 
-    lista_resultados = soup.find('ul', id='main-ad-list')
+    lista_resultados = soup.find('ul', id='ad-list')
     itens = lista_resultados.find_all('li')
 
     itens_encontrados = []

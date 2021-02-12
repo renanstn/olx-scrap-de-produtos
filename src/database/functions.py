@@ -55,7 +55,7 @@ class DatabaseFunctions:
         return possui_duplicados
 
     @staticmethod
-    def get_solicitacoes(self):
+    def get_solicitacoes():
         solicitacoes = Solicitacao.select()
         return solicitacoes
 
